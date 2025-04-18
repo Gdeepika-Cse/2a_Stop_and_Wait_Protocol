@@ -3,76 +3,39 @@
 # REG NO.- 212224040060
 
 ## AIM 
+
 To write a python program to perform stop and wait protocol
+
 ## ALGORITHM
+
 1. Start the program.
 2. Get the frame size from the user
 3. To create the frame based on the user request.
 4. To send frames to server from the client side.
 5. If your frames reach the server it will send ACK signal to client
 6. Stop the Program
+   
 ## PROGRAM
+
 ## SERVER
-```python
-import socket
 
-server = socket.socket()
-server.bind(('localhost', 8000))
-server.listen(1)
-print("Server is listening...")
-conn, addr = server.accept()
-print(f"Connected with {addr}")
-
-while True:
-    data = conn.recv(1024).decode()
-
-    if data:
-        print(f"Received: {data}")
-        conn.send("ACK".encode())
-
-        if data.lower() == 'exit':  
-            print("Connection closed by client")
-            conn.close()
-            break
-
-```
+![Screenshot 2025-04-18 212536](https://github.com/user-attachments/assets/7e533f52-2f52-47e7-b39d-e26f9b13e452)
 
 ### client:
-```python
 
-import socket
-import time
+![Screenshot 2025-04-18 212454](https://github.com/user-attachments/assets/f53d7718-2a92-4285-9b5a-2d2fac511bb7)
 
-client = socket.socket()
-client.connect(('localhost', 8000))
-client.settimeout(5)  
 
-while True:
-    msg = input("Enter a message (or type 'exit' to quit): ")
+## OUTPUT:
 
-    client.send(msg.encode())  
-
-    if msg.lower() == 'exit':  
-        print("Connection closed by client")
-        client.close()
-        break
-
-    try:
-        ack = client.recv(1024).decode()
-        if ack == "ACK":
-            print(f"Server acknowledged: {ack}")
-    except socket.timeout:
-        print("No ACK received, retransmitting...")
-        continue  
-
-```
-## OUTPUT
 client
-![image](https://github.com/user-attachments/assets/ba7c0d1f-8cfd-4bbd-aec3-6df0d1fa8fd4)
+![Screenshot 2025-04-18 212509](https://github.com/user-attachments/assets/1518358e-5f3b-436e-97ed-69d05937b630)
 
 
 server
-![image](https://github.com/user-attachments/assets/35fb191d-3e6e-49a3-aeec-dae3ea4dcfce)
+![Screenshot 2025-04-18 212621](https://github.com/user-attachments/assets/e215517c-8b52-4bfc-98ab-0af9f6adffb1)
+
+
 
 
 ## RESULT
